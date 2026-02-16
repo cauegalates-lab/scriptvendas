@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxo de Vendas | Cauê Galates</title>
+    <title>Fluxo de Vendas Carnaval | Cauê Galates</title>
     <style>
         :root {
-            --primary: #25d366;
-            --secondary: #075e54;
-            --bg: #f0f2f5;
+            --primary: #ff007f; /* Rosa Carnaval */
+            --secondary: #6200ea; /* Roxo Carnaval */
+            --bg: #f5f0f9;
             --white: #ffffff;
             --danger: #ff4d4d;
-            --info: #3498db;
+            --info: #00bcd4;
             --gold: #d4af37;
             --text-main: #2c3e50;
         }
@@ -32,7 +32,7 @@
         header { 
             text-align: center; 
             padding: 15px; 
-            background: linear-gradient(135deg, var(--secondary), #0a3d35);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
             border-radius: 10px;
             color: white;
             margin-bottom: 20px;
@@ -46,7 +46,7 @@
             font-size: 0.85rem; 
             margin: 20px 0 10px 0; 
             text-transform: uppercase;
-            border-left: 4px solid var(--secondary);
+            border-left: 4px solid var(--primary);
             padding-left: 10px;
         }
 
@@ -70,7 +70,6 @@
             flex-direction: column;
         }
 
-        /* Setinhas entre os cards */
         .card:not(:last-child)::after {
             content: "➔";
             position: absolute;
@@ -110,7 +109,7 @@
         }
 
         .btn-copy { 
-            background: var(--primary); 
+            background: var(--secondary); 
             color: white; 
             border: none; 
             padding: 8px 0; 
@@ -140,29 +139,27 @@
 
 <div class="container">
     <header>
-        <h1>Script de Vendas Oficial 🚀</h1>
+        <h1>🎭 Script de Vendas Carnaval 🚀</h1>
     </header>
 
     <h2>📍 Fluxo Principal (Conversão)</h2>
     <div class="grid-flow">
         <div class="card">
             <span class="tag">1. Apresentação</span>
-            <div class="text" id="t1">O valor normal do curso é 12x de R$ 290,00 no cartão. 
-Mas até amanhã, às 18h, o valor fica por *12x de R$ 124,00* no cartão. 
-Para fecharmos sua vaga nesse valor, no cartão atende você?</div>
+            <div class="text" id="t1">Entramos no ritmo de Carnaval! 🎊 O valor normal é 12x de R$ 290,00, mas até amanhã, às 18h, fica por apenas *12x de R$ 124,00*.
+Para fecharmos sua vaga nesse lote promocional, no cartão atende você?</div>
             <button class="btn-copy" onclick="copy('t1', this)">Copiar</button>
         </div>
 
         <div class="card">
             <span class="tag">2. Validação Site</span>
-            <div class="text" id="t2">Isso mesmo! 😊 O valor do site já é o promocional e expira amanhã às 18h.
-Como o sistema volta ao preço cheio automaticamente, vamos validar sua matrícula agora para garantir o desconto?</div>
+            <div class="text" id="t2">Isso mesmo! 😊 Esse preço é o nosso "Lote de Carnaval" e expira amanhã. O sistema volta ao valor cheio automaticamente. Vamos validar sua matrícula agora?</div>
             <button class="btn-copy" onclick="copy('t2', this)">Copiar</button>
         </div>
 
         <div class="card card-info">
             <span class="tag">3. Opção Boleto/PIX</span>
-            <div class="text" id="t3">No boleto, a oferta baixa de 1 entrada + 18x de R$ 199 para apenas 1 entrada + 18x de R$ 99,00.
+            <div class="text" id="t3">No plano de Carnaval, o boleto baixa para 1 entrada + 18x de R$ 99,00. 🥁
 Posso gerar o seu boleto agora ou prefere o código PIX para liberar o acesso na hora?</div>
             <button class="btn-copy" onclick="copy('t3', this)">Copiar</button>
         </div>
@@ -172,52 +169,46 @@ Posso gerar o seu boleto agora ou prefere o código PIX para liberar o acesso na
     <div class="grid-flow">
         <div class="card card-bonus">
             <span class="tag">Caro + Brinde Pós</span>
-            <div class="text" id="o1">Entendo! Mas olha só: além do desconto, vou te dar de brinde uma Pós-Graduação de até 600 horas para turbinar seu currículo. 
-O investimento fica menos de R$ 4,10 por dia por dois certificados. Vale o esforço para fechar agora?</div>
+            <div class="text" id="o1">Entendo! Mas além do desconto, vou te dar uma Pós de brinde. O investimento fica menos de R$ 4,15 por dia por dois certificados. Vale o esforço para fechar agora?</div>
             <button class="btn-copy" onclick="copy('o1', this)">Copiar</button>
         </div>
 
         <div class="card card-bonus">
             <span class="tag">Marido/Esposa + Bônus</span>
-            <div class="text" id="o2">Claro! É importante alinhar em casa. 
-Só lembre de avisar que, fechando até amanhã, você ainda ganha uma Pós de brinde (600h). Quer que eu segure esse bônus enquanto você fala com ele(a)?</div>
+            <div class="text" id="o2">Claro! Importante alinhar em casa. Só lembre que, fechando até amanhã, você ainda ganha a Pós de brinde. Quer que eu segure esse bônus enquanto você fala com ele(a)?</div>
             <button class="btn-copy" onclick="copy('o2', this)">Copiar</button>
         </div>
 
         <div class="card card-info">
             <span class="tag">Mês que vem</span>
-            <div class="text" id="o3">O problema é que mês que vem o valor volta para R$ 290 e você perde o brinde da Pós (600h).
-Consegue pagar apenas a entrada hoje do boleto  para garantir esse preço e o seu bônus reservado?</div>
+            <div class="text" id="o3">O problema é que após o Carnaval o valor volta para R$ 290 e você perde o bônus da Pós. Consegue pagar só a entrada hoje para garantir esse preço e seu brinde?</div>
             <button class="btn-copy" onclick="copy('o3', this)">Copiar</button>
         </div>
     </div>
 
-    <h2>📲 Follow-up e Gatilhos Finais</h2>
+    <h2>📲 Follow-up (Dia Seguinte / Último Dia)</h2>
     <div class="grid-flow">
         <div class="card card-danger">
-            <span class="tag">Boleto Pendente</span>
-            <div class="text" id="f1">Oi! Vi aqui que o pagamento da entrada ainda não caiu no sistema. 
-Tivemos algum problema com o código ou com o banco? Me avisa para eu garantir que sua vaga e o brinde da Pós não sejam cancelados.</div>
+            <span class="tag">Recontato Manhã</span>
+            <div class="text" id="f1">Oi! Vi que não finalizamos sua matrícula ontem. Passando para avisar que o seu desconto de Carnaval (12x R$ 124) e o brinde da Pós encerram hoje às 18h. Vamos garantir?</div>
             <button class="btn-copy" onclick="copy('f1', this)">Copiar</button>
         </div>
 
         <div class="card card-info">
             <span class="tag">Ainda Indeciso</span>
-            <div class="text" id="f2">Oi! Ainda não recebi sua confirmação sobre qual forma de pagamento fica melhor para você.
-Lembrando que o valor de R$ 124,00 encerra hoje às 18h. Para você é melhor o parcelamento no cartão ou o plano do boleto?</div>
+            <div class="text" id="f2">Oi! Ainda não recebi sua confirmação. Lembrando que o valor de R$ 124,00 encerra hoje às 18h. Para você é melhor o parcelamento no cartão ou o plano do boleto?</div>
             <button class="btn-copy" onclick="copy('f2', this)">Copiar</button>
         </div>
 
         <div class="card card-danger">
-            <span class="tag">Última Chamada (18h)</span>
-            <div class="text" id="f3">Oi! O prazo encerra hoje, às 18h. O valor volta para R$ 290 e o brinde da Pós de 600h será removido.
-Vamos garantir sua matrícula agora para você não perder esse benefício?</div>
+            <span class="tag">Encerramento (18h)</span>
+            <div class="text" id="f3">Oi! O prazo do lote de Carnaval encerra agora. O valor volta para R$ 290 e o brinde da Pós será removido. Vamos garantir sua matrícula no último minuto? 🎭</div>
             <button class="btn-copy" onclick="copy('f3', this)">Copiar</button>
         </div>
     </div>
 
     <footer>
-        Desenvolvido por <span class="dev-name">Cauê Galates</span>
+        Desenvolvido para <span class="dev-name">Cauê Galates</span>
     </footer>
 </div>
 
@@ -244,4 +235,3 @@ Vamos garantir sua matrícula agora para você não perder esse benefício?</div
 
 </body>
 </html>
-
