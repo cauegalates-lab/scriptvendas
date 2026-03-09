@@ -3,213 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxo de Vendas Carnaval | Cauê Galates</title>
+    <title>Fluxo de Vendas | Cauê Galates</title>
     <style>
         :root {
-            --primary: #ff007f; /* Rosa Carnaval */
-            --secondary: #6200ea; /* Roxo Carnaval */
-            --bg: #f5f0f9;
+            --primary: #1a73e8;
+            --secondary: #202124;
+            --bg: #f8f9fa;
             --white: #ffffff;
-            --danger: #ff4d4d;
-            --info: #00bcd4;
-            --gold: #d4af37;
-            --text-main: #2c3e50;
+            --danger: #d93025;
+            --info: #03a9f4;
+            --success: #1e8e3e;
+            --text-main: #3c4043;
+            --border: #dadce0;
         }
 
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background-color: var(--bg); 
-            margin: 0;
-            padding: 10px;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); margin: 0; padding: 10px; color: var(--text-main); display: flex; flex-direction: column; align-items: center; }
         .container { max-width: 1200px; width: 100%; }
-
-        header { 
-            text-align: center; 
-            padding: 15px; 
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            border-radius: 10px;
-            color: white;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
+        header { text-align: center; padding: 15px; background: var(--secondary); border-radius: 10px; color: white; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        
-        h2 { 
-            color: var(--secondary); 
-            font-size: 0.85rem; 
-            margin: 20px 0 10px 0; 
-            text-transform: uppercase;
-            border-left: 4px solid var(--primary);
-            padding-left: 10px;
-        }
-
-        .grid-flow {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            align-items: start;
-            position: relative;
-        }
-
-        .card { 
-            background: var(--white); 
-            padding: 15px; 
-            border-radius: 8px; 
-            position: relative; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            border-top: 5px solid var(--primary);
-            height: 180px; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:not(:last-child)::after {
-            content: "➔";
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--secondary);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        @media (max-width: 900px) {
-            .card:not(:last-child)::after { content: "⬇"; right: 50%; top: auto; bottom: -22px; transform: translateX(50%); }
-            .grid-flow { gap: 35px; }
-        }
-
-        .card-bonus { border-top-color: var(--gold); background: #fffdf2; }
+        h2 { color: var(--secondary); font-size: 0.85rem; margin: 20px 0 10px 0; text-transform: uppercase; border-left: 4px solid var(--primary); padding-left: 10px; }
+        .grid-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--white); padding: 15px; border-radius: 8px; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-top: 5px solid var(--primary); height: 160px; display: flex; flex-direction: column; }
+        .card-bonus { border-top-color: var(--success); }
         .card-danger { border-top-color: var(--danger); }
         .card-info { border-top-color: var(--info); }
-
-        .tag { 
-            font-size: 0.65rem; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .text { 
-            font-size: 0.85rem; 
-            line-height: 1.3; 
-            color: #333; 
-            overflow-y: auto;
-            margin-bottom: 10px;
-            white-space: pre-wrap;
-            flex-grow: 1;
-        }
-
-        .btn-copy { 
-            background: var(--secondary); 
-            color: white; 
-            border: none; 
-            padding: 8px 0; 
-            width: 100%;
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 0.75rem; 
-            transition: 0.2s;
-        }
-
-        .btn-copy:active { transform: scale(0.98); }
+        .tag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: #666; margin-bottom: 8px; }
+        .text { font-size: 0.85rem; line-height: 1.3; color: #333; overflow-y: auto; margin-bottom: 10px; white-space: pre-wrap; flex-grow: 1; }
+        .btn-copy { background: var(--primary); color: white; border: none; padding: 8px 0; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.75rem; transition: 0.2s; }
         .btn-copy.copied { background: #333; }
-
-        footer { 
-            text-align: center; 
-            margin-top: 30px; 
-            padding: 15px; 
-            font-size: 0.8rem; 
-            color: #777;
-        }
-
-        .dev-name { font-weight: bold; color: var(--secondary); }
+        footer { text-align: center; margin-top: 30px; padding: 15px; font-size: 0.8rem; color: #777; }
+        .dev-name { font-weight: bold; color: var(--primary); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>🎭 Script de Vendas Carnaval 🚀</h1>
+        <h1>Fluxo de Vendas Profissional</h1>
     </header>
 
     <h2>📍 Fluxo Principal (Conversão)</h2>
     <div class="grid-flow">
         <div class="card">
             <span class="tag">1. Apresentação</span>
-            <div class="text" id="t1">Entramos no ritmo de Carnaval! 🎊 O valor normal é 12x de R$ 290,00, mas até amanhã, às 18h, fica por apenas *12x de R$ 124,00*.
-Para fecharmos sua vaga nesse lote promocional, no cartão atende você?</div>
+            <div class="text" id="t1">Consegui liberar uma vaga de R$ 290 por apenas *12x de R$ 124*. 
+A condição vale até amanhã às 18h. Podemos validar sua matrícula no cartão?</div>
             <button class="btn-copy" onclick="copy('t1', this)">Copiar</button>
         </div>
-
         <div class="card">
-            <span class="tag">2. Validação Site</span>
-            <div class="text" id="t2">Isso mesmo! 😊 Esse preço é o nosso "Lote de Carnaval" e expira amanhã. O sistema volta ao valor cheio automaticamente. Vamos validar sua matrícula agora?</div>
+            <span class="tag">2. Validação</span>
+            <div class="text" id="t2">Exato! Esse valor é uma condição especial que expira amanhã. Depois disso, o sistema volta ao valor cheio. Vamos garantir sua vaga?</div>
             <button class="btn-copy" onclick="copy('t2', this)">Copiar</button>
         </div>
-
         <div class="card card-info">
-            <span class="tag">3. Opção Boleto/PIX</span>
-            <div class="text" id="t3">No plano de Carnaval, o boleto baixa para 1 entrada + 18x de R$ 99,00. 🥁
-Posso gerar o seu boleto agora ou prefere o código PIX para liberar o acesso na hora?</div>
+            <span class="tag">3. Boleto/PIX</span>
+            <div class="text" id="t3">No boleto, fica *1 entrada + 18x de R$ 99*. 
+Prefere que eu gere o boleto agora ou o código PIX para liberar o acesso na hora?</div>
             <button class="btn-copy" onclick="copy('t3', this)">Copiar</button>
         </div>
     </div>
 
-    <h2>🛡️ Quebra de Objeções (Reforço)</h2>
+    <h2>🛡️ Quebra de Objeções</h2>
     <div class="grid-flow">
         <div class="card card-bonus">
-            <span class="tag">Caro + Brinde Pós</span>
-            <div class="text" id="o1">Entendo! Mas além do desconto, vou te dar uma Pós de brinde. O investimento fica menos de R$ 4,15 por dia por dois certificados. Vale o esforço para fechar agora?</div>
+            <span class="tag">Investimento + Brinde</span>
+            <div class="text" id="o1">Entendo! Além do desconto, vou incluir uma Pós de brinde. Fica menos de R$ 4,15 por dia por dois certificados. Vale o esforço hoje?</div>
             <button class="btn-copy" onclick="copy('o1', this)">Copiar</button>
         </div>
-
         <div class="card card-bonus">
-            <span class="tag">Marido/Esposa + Bônus</span>
-            <div class="text" id="o2">Claro! Importante alinhar em casa. Só lembre que, fechando até amanhã, você ainda ganha a Pós de brinde. Quer que eu segure esse bônus enquanto você fala com ele(a)?</div>
+            <span class="tag">Decisão Conjunta</span>
+            <div class="text" id="o2">Claro! Importante alinhar. Só lembre que, fechando hoje, você garante a Pós de brinde. Quer que eu reserve esse bônus enquanto você fala com ele(a)?</div>
             <button class="btn-copy" onclick="copy('o2', this)">Copiar</button>
         </div>
-
         <div class="card card-info">
-            <span class="tag">Mês que vem</span>
-            <div class="text" id="o3">O problema é que após o Carnaval o valor volta para R$ 290 e você perde o bônus da Pós. Consegue pagar só a entrada hoje para garantir esse preço e seu brinde?</div>
+            <span class="tag">Próximo Mês</span>
+            <div class="text" id="o3">O problema é que mês que vem volta para R$ 290 e sem o brinde. Consegue pagar só a entrada hoje para segurar esse preço e a Pós?</div>
             <button class="btn-copy" onclick="copy('o3', this)">Copiar</button>
         </div>
     </div>
 
-    <h2>📲 Follow-up (Dia Seguinte / Último Dia)</h2>
+    <h2>📲 Follow-up</h2>
     <div class="grid-flow">
         <div class="card card-danger">
-            <span class="tag">Recontato Manhã</span>
-            <div class="text" id="f1">Oi! Vi que não finalizamos sua matrícula ontem. Passando para avisar que o seu desconto de Carnaval (12x R$ 124) e o brinde da Pós encerram hoje às 18h. Vamos garantir?</div>
+            <span class="tag">Lembrete Manhã</span>
+            <div class="text" id="f1">Bom dia! Vi que não finalizamos ontem. Passando para avisar que seu desconto (12x R$ 124) e o brinde da Pós encerram hoje às 18h. Vamos garantir?</div>
             <button class="btn-copy" onclick="copy('f1', this)">Copiar</button>
         </div>
-
         <div class="card card-info">
-            <span class="tag">Ainda Indeciso</span>
-            <div class="text" id="f2">Oi! Ainda não recebi sua confirmação. Lembrando que o valor de R$ 124,00 encerra hoje às 18h. Para você é melhor o parcelamento no cartão ou o plano do boleto?</div>
+            <span class="tag">Indeciso</span>
+            <div class="text" id="f2">Olá! Ainda não recebi sua confirmação. Como o prazo encerra às 18h, para você é melhor o parcelamento no cartão ou o plano do boleto?</div>
             <button class="btn-copy" onclick="copy('f2', this)">Copiar</button>
         </div>
-
         <div class="card card-danger">
-            <span class="tag">Encerramento (18h)</span>
-            <div class="text" id="f3">Oi! O prazo do lote de Carnaval encerra agora. O valor volta para R$ 290 e o brinde da Pós será removido. Vamos garantir sua matrícula no último minuto? 🎭</div>
+            <span class="tag">Encerramento</span>
+            <div class="text" id="f3">Olá! O prazo da condição especial acaba agora. O valor volta para R$ 290 e o bônus será removido. Vamos garantir sua matrícula no último minuto?</div>
             <button class="btn-copy" onclick="copy('f3', this)">Copiar</button>
         </div>
     </div>
 
-    <footer>
-        Desenvolvido para <span class="dev-name">Cauê Galates</span>
-    </footer>
+    <footer>Desenvolvido para <span class="dev-name">Cauê Galates</span></footer>
 </div>
 
 <script>
@@ -221,15 +113,10 @@ Posso gerar o seu boleto agora ou prefere o código PIX para liberar o acesso na
         input.select();
         document.execCommand('copy');
         document.body.removeChild(input);
-        
         const originalText = btn.innerText;
         btn.innerText = "Copiado!";
         btn.classList.add('copied');
-        
-        setTimeout(() => { 
-            btn.innerText = originalText;
-            btn.classList.remove('copied');
-        }, 1500);
+        setTimeout(() => { btn.innerText = originalText; btn.classList.remove('copied'); }, 1500);
     }
 </script>
 
