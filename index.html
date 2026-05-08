@@ -263,10 +263,8 @@
     }
 
     .metric.total strong { color: var(--green); }
-    .metric.desq strong { color: var(--danger); }
     .metric.semgrad strong { color: var(--yellow-text); }
     body.dark-mode .metric.total strong,
-    body.dark-mode .metric.desq strong { color: #fff; }
     body.dark-mode .metric.semgrad strong { color: var(--yellow); }
 
     .page {
@@ -402,7 +400,7 @@
 
     .stats-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 6px;
     }
 
@@ -435,15 +433,13 @@
     }
 
     .stat-mini.camp strong { color: var(--green); }
-    .stat-mini.desq strong { color: var(--danger); }
     .stat-mini.semgrad strong { color: var(--yellow-text); }
     body.dark-mode .stat-mini.camp strong,
-    body.dark-mode .stat-mini.desq strong { color: #fff; }
     body.dark-mode .stat-mini.semgrad strong { color: var(--yellow); }
 
     .symbol-actions {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 6px;
     }
 
@@ -463,20 +459,13 @@
       color: #fff;
     }
 
-    .symbol-desq {
-      background: var(--danger);
-      color: #fff;
-      font-size: 18px;
-    }
-
     .symbol-semgrad {
       background: var(--yellow);
       color: #713f12;
       font-size: 18px;
     }
 
-    body.dark-mode .symbol-lead,
-    body.dark-mode .symbol-desq {
+    body.dark-mode .symbol-lead {
       background: #fff;
       color: var(--blue-dark);
     }
@@ -505,7 +494,7 @@
     .rankings-page {
       height: 100%;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       overflow: hidden;
     }
@@ -593,18 +582,12 @@
       background: var(--green);
     }
 
-    .legend-symbol.x {
-      color: #fff;
-      background: var(--danger);
-    }
-
     .legend-symbol.dot {
       color: #713f12;
       background: var(--yellow);
     }
 
-    body.dark-mode .legend-symbol.plus,
-    body.dark-mode .legend-symbol.x {
+    body.dark-mode .legend-symbol.plus {
       color: var(--blue-dark);
       background: #fff;
     }
@@ -772,18 +755,12 @@
       color: #fff;
     }
 
-    .modal-actions .btn-modal-desq {
-      background: var(--danger);
-      color: #fff;
-    }
-
     .modal-actions .btn-modal-semgrad {
       background: var(--yellow);
       color: #713f12;
     }
 
-    body.dark-mode .modal-actions .btn-modal-lead,
-    body.dark-mode .modal-actions .btn-modal-desq {
+    body.dark-mode .modal-actions .btn-modal-lead {
       background: #fff;
       color: var(--blue-dark);
     }
@@ -915,7 +892,7 @@
       <header class="topbar">
         <div class="title-wrap">
           <h1>Contador de Leads por Campanha</h1>
-          <div class="subtitle">+1 = lead respondeu, X = desqualificado, bola amarela = sem graduação.</div>
+          <div class="subtitle">+1 = lead respondeu, bola amarela = sem graduação.</div>
         </div>
         <div class="actions">
           <button class="btn-soft" onclick="alternarTema()" id="themeButton">Modo escuro</button>
@@ -956,22 +933,10 @@
               <div class="legend-title">Significado dos símbolos</div>
               <div class="legend-items">
                 <span class="legend-item"><span class="legend-symbol plus">+1</span> Lead respondeu</span>
-                <span class="legend-item"><span class="legend-symbol x">X</span> Desqualificado</span>
                 <span class="legend-item"><span class="legend-symbol dot">●</span> Sem graduação</span>
               </div>
             </div>
             <div class="ranking-list total" id="rankingCampanhas"></div>
-          </section>
-
-          <section class="ranking-card">
-            <div class="ranking-head">
-              <div>
-                <div class="ranking-title">Ranking: Desqualificados</div>
-                <div class="ranking-subtitle">Campanhas com mais leads desqualificados.</div>
-              </div>
-              <span class="pill">X</span>
-            </div>
-            <div class="ranking-list" id="rankingDesqualificados"></div>
           </section>
 
           <section class="ranking-card">
@@ -995,7 +960,6 @@
       <div class="modal-message" id="modalDesfazerText"></div>
       <div class="modal-actions">
         <button class="btn-modal-lead" onclick="confirmarDesfazerModal('campanha')">+1 Lead respondeu</button>
-        <button class="btn-modal-desq" onclick="confirmarDesfazerModal('desqualificado')">X Desqualificado</button>
         <button class="btn-modal-semgrad" onclick="confirmarDesfazerModal('semGraduacao')">● Sem graduação</button>
         <button class="btn-modal-cancel" onclick="fecharModalDesfazer()">Cancelar</button>
       </div>
@@ -1037,7 +1001,8 @@
       { id: 'principal-interesse', nome: '[VENDAS] - [CAMPANHA PRINCIPAL] 30/12 - Anúncio 2 - imagem 2', mensagem: 'Olá, tenho interesse nos cursos de 2ª Graduação online.' },
       { id: 'principal-pedagogia', nome: '[VENDAS] - [CAMPANHA PRINCIPAL] 30/12 - Anúncio 3 - imagem 3', mensagem: 'Olá, gostaria de saber mais sobre o curso de Pedagogia' },
       { id: 'tecnico-tecnologo', nome: '[TÉCNICO PARA TECNÓLOGO] - 07/05', mensagem: 'Olá, quero informações sobre os cursos de tecnólogo.' },
-      { id: 'campanha-site', nome: 'CAMPANHA SITE', mensagem: 'Campanha Site' }
+      { id: 'campanha-site', nome: 'CAMPANHA SITE', mensagem: 'Campanha Site' },
+      { id: 'secretaria', nome: 'SECRETARIA', mensagem: 'Secretaria' }
     ];
 
     let db = null;
@@ -1046,7 +1011,7 @@
     let campanhaParaDesfazer = null;
 
     const baseContagem = {};
-    campanhas.forEach(c => baseContagem[c.id] = { campanha: 0, desqualificado: 0, semGraduacao: 0 });
+    campanhas.forEach(c => baseContagem[c.id] = { campanha: 0, semGraduacao: 0 });
 
     function aplicarTemaSalvo() {
       const tema = localStorage.getItem("temaPainelCampanhas") || "claro";
@@ -1100,7 +1065,6 @@
           const item = dados[campanha.id] || {};
           contagemAtual[campanha.id] = {
             campanha: Number(item.campanha || 0),
-            desqualificado: Number(item.desqualificado || 0),
             semGraduacao: Number(item.semGraduacao || 0)
           };
         });
@@ -1128,9 +1092,7 @@
 
         const label = tipo === "campanha"
           ? "+1 lead respondeu"
-          : tipo === "desqualificado"
-            ? "X desqualificado"
-            : "● sem graduação";
+          : "● sem graduação";
 
         mostrarToast(`${label}: ${campanha.mensagem}`);
       } catch (error) {
@@ -1187,9 +1149,7 @@
 
         const label = tipo === "campanha"
           ? "+1 lead respondeu"
-          : tipo === "desqualificado"
-            ? "X desqualificado"
-            : "● sem graduação";
+          : "● sem graduação";
 
         mostrarToast(`Desfeito: ${label} - ${campanha.mensagem}`);
       } catch (error) {
@@ -1211,19 +1171,16 @@
 
     function totaisGerais() {
       let campanha = 0;
-      let desqualificado = 0;
       let semGraduacao = 0;
 
       campanhas.forEach(itemCampanha => {
         const item = contagemAtual[itemCampanha.id] || {};
         campanha += Number(item.campanha || 0);
-        desqualificado += Number(item.desqualificado || 0);
         semGraduacao += Number(item.semGraduacao || 0);
       });
 
       return {
         campanha,
-        desqualificado,
         semGraduacao
       };
     }
@@ -1234,8 +1191,8 @@
 
       document.getElementById('summary').innerHTML = `
         <div class="metric total"><span>Leads que responderam</span><strong>${totais.campanha}</strong></div>
-        <div class="metric desq"><span>Desqualificados</span><strong>${totais.desqualificado}</strong></div>
         <div class="metric semgrad"><span>Não tem graduação</span><strong>${totais.semGraduacao}</strong></div>
+        <div class="metric"><span>Campanhas cadastradas</span><strong>${campanhas.length}</strong></div>
         <div class="metric"><span>Campanha líder</span><strong style="font-size:16px;letter-spacing:-0.04em;">${lider && lider.total ? lider.mensagem : 'Nenhuma ainda'}</strong></div>
       `;
     }
@@ -1244,7 +1201,7 @@
       const grid = document.getElementById('campaignGrid');
 
       grid.innerHTML = campanhas.map(campanha => {
-        const item = contagemAtual[campanha.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
+        const item = contagemAtual[campanha.id] || { campanha: 0, semGraduacao: 0 };
 
         return `
           <div class="campaign-card">
@@ -1255,10 +1212,6 @@
                 <strong>${item.campanha || 0}</strong>
                 <span>+1</span>
               </div>
-              <div class="stat-mini desq">
-                <strong>${item.desqualificado || 0}</strong>
-                <span>X</span>
-              </div>
               <div class="stat-mini semgrad">
                 <strong>${item.semGraduacao || 0}</strong>
                 <span>●</span>
@@ -1267,7 +1220,6 @@
 
             <div class="symbol-actions">
               <button class="symbol-btn symbol-lead" onclick="registrarClassificacao('${campanha.id}', 'campanha')">+1</button>
-              <button class="symbol-btn symbol-desq" onclick="registrarClassificacao('${campanha.id}', 'desqualificado')">X</button>
               <button class="symbol-btn symbol-semgrad" onclick="registrarClassificacao('${campanha.id}', 'semGraduacao')">●</button>
             </div>
 
@@ -1280,12 +1232,11 @@
     function getRanking(tipo) {
       return campanhas
         .map(c => {
-          const item = contagemAtual[c.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
+          const item = contagemAtual[c.id] || { campanha: 0, semGraduacao: 0 };
 
           return {
             ...c,
             campanha: Number(item.campanha || 0),
-            desqualificado: Number(item.desqualificado || 0),
             semGraduacao: Number(item.semGraduacao || 0),
             total: Number(item[tipo] || 0)
           };
@@ -1319,7 +1270,6 @@
       renderizarResumo();
       renderizarCampanhas();
       renderizarRanking("campanha", "rankingCampanhas");
-      renderizarRanking("desqualificado", "rankingDesqualificados");
       renderizarRanking("semGraduacao", "rankingSemGraduacao");
     }
 
@@ -1353,22 +1303,21 @@
 
     window.copiarResumo = function() {
       const linhas = campanhas.map(c => {
-        const item = contagemAtual[c.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
-        return `${c.mensagem}: ${item.campanha || 0} respondeu | ${item.desqualificado || 0} desqualificados | ${item.semGraduacao || 0} sem graduação`;
+        const item = contagemAtual[c.id] || { campanha: 0, semGraduacao: 0 };
+        return `${c.mensagem}: ${item.campanha || 0} respondeu | ${item.semGraduacao || 0} sem graduação`;
       });
       navigator.clipboard.writeText(linhas.join('\n'));
       alert('Resumo copiado.');
     };
 
     window.exportarCSV = function() {
-      const linhas = [['Mensagem', 'Lead respondeu', 'Desqualificados', 'Nao tem graduacao']];
+      const linhas = [['Mensagem', 'Lead respondeu', 'Nao tem graduacao']];
 
       campanhas.forEach(c => {
-        const item = contagemAtual[c.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
+        const item = contagemAtual[c.id] || { campanha: 0, semGraduacao: 0 };
         linhas.push([
           c.mensagem,
           Number(item.campanha || 0),
-          Number(item.desqualificado || 0),
           Number(item.semGraduacao || 0)
         ]);
       });
