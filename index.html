@@ -23,7 +23,18 @@
       --blue-soft: #eff6ff;
       --blue-text: #1d4ed8;
 
+      --green: #16a34a;
+      --green-soft: #dcfce7;
+      --green-text: #166534;
+
+      --yellow: #facc15;
+      --yellow-soft: #fef9c3;
+      --yellow-text: #854d0e;
+
       --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --danger-text: #991b1b;
+
       --warning: #f59e0b;
 
       --radius: 18px;
@@ -49,7 +60,18 @@
       --blue-soft: rgba(255,255,255,.12);
       --blue-text: #ffffff;
 
+      --green: #ffffff;
+      --green-soft: rgba(255,255,255,.12);
+      --green-text: #ffffff;
+
+      --yellow: #facc15;
+      --yellow-soft: rgba(250, 204, 21, .18);
+      --yellow-text: #fef08a;
+
       --danger: #ffffff;
+      --danger-soft: rgba(255,255,255,.12);
+      --danger-text: #ffffff;
+
       --shadow: 0 16px 42px rgba(0,0,0,.34);
       --soft-shadow: 0 8px 22px rgba(0,0,0,.24);
     }
@@ -75,16 +97,16 @@
       width: 100%;
       height: 100vh;
       display: grid;
-      grid-template-columns: 82px 1fr;
+      grid-template-columns: 78px 1fr;
       overflow: hidden;
     }
 
     .sidebar {
-      padding: 12px 8px;
+      padding: 10px 7px;
       background: var(--blue-dark);
       display: grid;
       grid-template-rows: auto auto 1fr;
-      gap: 12px;
+      gap: 11px;
       border-right: 1px solid var(--line);
     }
 
@@ -108,7 +130,7 @@
 
     .nav-btn {
       width: 100%;
-      padding: 10px 6px;
+      padding: 10px 5px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.07);
@@ -133,21 +155,19 @@
       padding: 10px 12px 12px;
       display: grid;
       grid-template-rows: auto auto 1fr;
-      gap: 9px;
+      gap: 8px;
       overflow: hidden;
     }
 
     .topbar {
-      min-height: 44px;
+      min-height: 42px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
     }
 
-    .title-wrap {
-      min-width: 0;
-    }
+    .title-wrap { min-width: 0; }
 
     h1 {
       margin: 0;
@@ -176,12 +196,12 @@
 
     button {
       border: none;
-      border-radius: 12px;
-      padding: 8px 11px;
+      border-radius: 11px;
+      padding: 8px 10px;
       font-weight: 850;
       cursor: pointer;
       transition: .18s ease;
-      font-size: 12px;
+      font-size: 11px;
       white-space: nowrap;
     }
 
@@ -205,9 +225,7 @@
       color: #fff;
     }
 
-    .btn-orange:hover {
-      background: var(--orange-strong);
-    }
+    .btn-orange:hover { background: var(--orange-strong); }
 
     .summary {
       display: grid;
@@ -244,11 +262,12 @@
       white-space: nowrap;
     }
 
-    .metric.total strong { color: var(--blue-text); }
-    .metric.desq strong { color: var(--orange); }
-    .metric.semgrad strong { color: var(--blue); }
+    .metric.total strong { color: var(--green); }
+    .metric.desq strong { color: var(--danger); }
+    .metric.semgrad strong { color: var(--yellow-text); }
     body.dark-mode .metric.total strong,
-    body.dark-mode .metric.semgrad strong { color: #fff; }
+    body.dark-mode .metric.desq strong { color: #fff; }
+    body.dark-mode .metric.semgrad strong { color: var(--yellow); }
 
     .page {
       min-height: 0;
@@ -256,9 +275,7 @@
       display: none;
     }
 
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
 
     .panel {
       width: 100%;
@@ -274,7 +291,7 @@
     }
 
     .panel-head {
-      min-height: 52px;
+      min-height: 50px;
       padding: 10px 14px 8px;
       border-bottom: 1px solid var(--line);
       display: flex;
@@ -343,7 +360,7 @@
     .campaign-card {
       min-width: 0;
       min-height: 0;
-      padding: 9px;
+      padding: 10px;
       border-radius: 15px;
       background: var(--surface-2);
       border: 1px solid var(--line);
@@ -364,8 +381,8 @@
 
     .campaign-message {
       color: var(--text);
-      font-size: 12px;
-      line-height: 1.23;
+      font-size: 11.7px;
+      line-height: 1.22;
       font-weight: 790;
       letter-spacing: -.02em;
       overflow: hidden;
@@ -385,22 +402,21 @@
 
     .stats-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-      align-content: end;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
     }
 
     .stat-mini {
       min-width: 0;
-      padding: 7px;
-      border-radius: 12px;
+      padding: 5px 6px;
+      border-radius: 11px;
       background: var(--surface);
       border: 1px solid var(--line);
     }
 
     .stat-mini strong {
       display: block;
-      font-size: 19px;
+      font-size: 17px;
       line-height: 1;
       letter-spacing: -.07em;
     }
@@ -409,56 +425,78 @@
       display: block;
       margin-top: 4px;
       color: var(--muted);
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 950;
-      letter-spacing: .04em;
+      letter-spacing: .035em;
       text-transform: uppercase;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .stat-mini.desq strong { color: var(--orange); }
-    .stat-mini.semgrad strong { color: var(--blue); }
-    body.dark-mode .stat-mini.semgrad strong { color: #fff; }
+    .stat-mini.camp strong { color: var(--green); }
+    .stat-mini.desq strong { color: var(--danger); }
+    .stat-mini.semgrad strong { color: var(--yellow-text); }
+    body.dark-mode .stat-mini.camp strong,
+    body.dark-mode .stat-mini.desq strong { color: #fff; }
+    body.dark-mode .stat-mini.semgrad strong { color: var(--yellow); }
 
-    .category-actions {
+    .symbol-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
     }
 
-    .action-group {
-      display: grid;
-      gap: 5px;
+    .symbol-btn {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 950;
+      line-height: 1;
     }
 
-    .btn-add-desq {
-      background: var(--orange);
+    .symbol-lead {
+      background: var(--green);
       color: #fff;
     }
 
-    .btn-add-desq:hover { background: var(--orange-strong); }
-
-    .btn-add-semgrad {
-      background: var(--blue);
+    .symbol-desq {
+      background: var(--danger);
       color: #fff;
+      font-size: 18px;
     }
 
-    body.dark-mode .btn-add-semgrad {
+    .symbol-semgrad {
+      background: var(--yellow);
+      color: #713f12;
+      font-size: 18px;
+    }
+
+    body.dark-mode .symbol-lead,
+    body.dark-mode .symbol-desq {
       background: #fff;
       color: var(--blue-dark);
     }
 
-    .btn-undo {
-      padding: 6px 7px;
+    body.dark-mode .symbol-semgrad {
+      background: var(--yellow);
+      color: #713f12;
+    }
+
+    .btn-undo-card {
+      width: 100%;
+      padding: 8px 8px;
       background: var(--surface);
       color: var(--text);
       border: 1px solid var(--line);
       font-size: 11px;
+      border-radius: 12px;
     }
 
-    .btn-undo:hover {
+    .btn-undo-card:hover {
       background: var(--blue-soft);
       color: var(--blue-text);
       border-color: var(--blue);
@@ -504,6 +542,71 @@
       margin-top: 3px;
       color: var(--muted);
       font-size: 11.5px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .legend-title {
+      font-size: 12px;
+      font-weight: 950;
+      color: var(--text);
+    }
+
+    .legend-items {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 6px 8px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .legend-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .legend-symbol.plus {
+      color: #fff;
+      background: var(--green);
+    }
+
+    .legend-symbol.x {
+      color: #fff;
+      background: var(--danger);
+    }
+
+    .legend-symbol.dot {
+      color: #713f12;
+      background: var(--yellow);
+    }
+
+    body.dark-mode .legend-symbol.plus,
+    body.dark-mode .legend-symbol.x {
+      color: var(--blue-dark);
+      background: #fff;
     }
 
     .ranking-list {
@@ -557,13 +660,13 @@
       font-size: 12px;
     }
 
-    .ranking-list.semgrad .rank-position,
-    .ranking-list.total .rank-position {
+    .ranking-list.total .rank-position,
+    .ranking-list.semgrad .rank-position {
       background: var(--blue);
     }
 
-    body.dark-mode .ranking-list.semgrad .rank-position,
-    body.dark-mode .ranking-list.total .rank-position {
+    body.dark-mode .ranking-list.total .rank-position,
+    body.dark-mode .ranking-list.semgrad .rank-position {
       background: #fff;
       color: var(--blue-dark);
     }
@@ -583,13 +686,13 @@
       letter-spacing: -.06em;
     }
 
-    .ranking-list.semgrad .ranking-count,
-    .ranking-list.total .ranking-count {
+    .ranking-list.total .ranking-count,
+    .ranking-list.semgrad .ranking-count {
       color: var(--blue);
     }
 
-    body.dark-mode .ranking-list.semgrad .ranking-count,
-    body.dark-mode .ranking-list.total .ranking-count {
+    body.dark-mode .ranking-list.total .ranking-count,
+    body.dark-mode .ranking-list.semgrad .ranking-count {
       color: #fff;
     }
 
@@ -609,14 +712,86 @@
       transition: width .25s ease;
     }
 
-    .ranking-list.semgrad .bar-fill,
-    .ranking-list.total .bar-fill {
+    .ranking-list.total .bar-fill,
+    .ranking-list.semgrad .bar-fill {
       background: var(--blue);
     }
 
-    body.dark-mode .ranking-list.semgrad .bar-fill,
-    body.dark-mode .ranking-list.total .bar-fill {
+    body.dark-mode .ranking-list.total .bar-fill,
+    body.dark-mode .ranking-list.semgrad .bar-fill {
       background: #fff;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, .42);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(430px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, .28);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -.04em;
+      color: var(--text);
+    }
+
+    .modal-message {
+      margin: 10px 0 16px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .modal-actions {
+      display: grid;
+      gap: 9px;
+    }
+
+    .modal-actions .btn-modal-lead {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .modal-actions .btn-modal-desq {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .modal-actions .btn-modal-semgrad {
+      background: var(--yellow);
+      color: #713f12;
+    }
+
+    body.dark-mode .modal-actions .btn-modal-lead,
+    body.dark-mode .modal-actions .btn-modal-desq {
+      background: #fff;
+      color: var(--blue-dark);
+    }
+
+    .modal-actions .btn-modal-cancel {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--line);
     }
 
     .toast {
@@ -650,10 +825,7 @@
         grid-template-rows: repeat(3, minmax(0, 1fr));
       }
 
-      .campaign-message {
-        font-size: 11.4px;
-      }
-
+      .campaign-message { font-size: 11.4px; }
       button {
         padding: 7px 8px;
         font-size: 11px;
@@ -675,9 +847,7 @@
         align-items: center;
       }
 
-      .nav {
-        grid-template-columns: repeat(2, minmax(120px, 1fr));
-      }
+      .nav { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
 
       .main {
         height: auto;
@@ -702,9 +872,7 @@
         grid-template-rows: none;
       }
 
-      .campaign-card {
-        min-height: 178px;
-      }
+      .campaign-card { min-height: 178px; }
 
       .rankings-page {
         height: auto;
@@ -712,9 +880,7 @@
         overflow: visible;
       }
 
-      .ranking-card {
-        max-height: 460px;
-      }
+      .ranking-card { max-height: 520px; }
     }
 
     @media (max-width: 720px) {
@@ -725,19 +891,13 @@
       }
 
       .actions button,
-      .nav-btn {
-        width: 100%;
-      }
+      .nav-btn { width: 100%; }
 
       .summary,
-      .campaign-grid {
-        grid-template-columns: 1fr;
-      }
+      .campaign-grid { grid-template-columns: 1fr; }
 
       h1,
-      .subtitle {
-        white-space: normal;
-      }
+      .subtitle { white-space: normal; }
     }
   </style>
 </head>
@@ -755,7 +915,7 @@
       <header class="topbar">
         <div class="title-wrap">
           <h1>Contador de Leads por Campanha</h1>
-          <div class="subtitle">Classifique os leads por campanha. Use a área de rankings para análise completa.</div>
+          <div class="subtitle">+1 = lead respondeu, X = desqualificado, bola amarela = sem graduação.</div>
         </div>
         <div class="actions">
           <button class="btn-soft" onclick="alternarTema()" id="themeButton">Modo escuro</button>
@@ -772,7 +932,7 @@
           <div class="panel-head">
             <div>
               <div class="panel-title">Classificar por campanha</div>
-              <div class="panel-subtitle">Use + para marcar e Desfazer para corrigir a campanha específica.</div>
+              <div class="panel-subtitle">Clique direto no símbolo. O botão Desfazer pergunta qual modalidade remover.</div>
             </div>
             <span class="pill" id="connectionStatus"><span class="status-dot"></span>Conectando</span>
           </div>
@@ -788,11 +948,19 @@
             <div class="ranking-head">
               <div>
                 <div class="ranking-title">Ranking geral</div>
-                <div class="ranking-subtitle">Mais clicadas somando as duas classificações.</div>
+                <div class="ranking-subtitle">Leads que responderam.</div>
               </div>
-              <span class="pill pill-blue">Total</span>
+              <span class="pill pill-blue">+1</span>
             </div>
-            <div class="ranking-list total" id="rankingTotal"></div>
+            <div class="legend">
+              <div class="legend-title">Significado dos símbolos</div>
+              <div class="legend-items">
+                <span class="legend-item"><span class="legend-symbol plus">+1</span> Lead respondeu</span>
+                <span class="legend-item"><span class="legend-symbol x">X</span> Desqualificado</span>
+                <span class="legend-item"><span class="legend-symbol dot">●</span> Sem graduação</span>
+              </div>
+            </div>
+            <div class="ranking-list total" id="rankingCampanhas"></div>
           </section>
 
           <section class="ranking-card">
@@ -801,7 +969,7 @@
                 <div class="ranking-title">Ranking: Desqualificados</div>
                 <div class="ranking-subtitle">Campanhas com mais leads desqualificados.</div>
               </div>
-              <span class="pill">Laranja</span>
+              <span class="pill">X</span>
             </div>
             <div class="ranking-list" id="rankingDesqualificados"></div>
           </section>
@@ -812,13 +980,26 @@
                 <div class="ranking-title">Ranking: Não tem graduação</div>
                 <div class="ranking-subtitle">Campanhas com mais leads sem graduação.</div>
               </div>
-              <span class="pill pill-blue">Azul</span>
+              <span class="pill pill-blue">●</span>
             </div>
             <div class="ranking-list semgrad" id="rankingSemGraduacao"></div>
           </section>
         </div>
       </section>
     </main>
+  </div>
+
+  <div class="modal-overlay" id="modalDesfazer">
+    <div class="modal-box">
+      <h2 class="modal-title">Desfazer qual modalidade?</h2>
+      <div class="modal-message" id="modalDesfazerText"></div>
+      <div class="modal-actions">
+        <button class="btn-modal-lead" onclick="confirmarDesfazerModal('campanha')">+1 Lead respondeu</button>
+        <button class="btn-modal-desq" onclick="confirmarDesfazerModal('desqualificado')">X Desqualificado</button>
+        <button class="btn-modal-semgrad" onclick="confirmarDesfazerModal('semGraduacao')">● Sem graduação</button>
+        <button class="btn-modal-cancel" onclick="fecharModalDesfazer()">Cancelar</button>
+      </div>
+    </div>
   </div>
 
   <div class="toast" id="toast"></div>
@@ -862,9 +1043,10 @@
     let db = null;
     let contagemAtual = {};
     let toastTimer = null;
+    let campanhaParaDesfazer = null;
 
     const baseContagem = {};
-    campanhas.forEach(c => baseContagem[c.id] = { desqualificado: 0, semGraduacao: 0 });
+    campanhas.forEach(c => baseContagem[c.id] = { campanha: 0, desqualificado: 0, semGraduacao: 0 });
 
     function aplicarTemaSalvo() {
       const tema = localStorage.getItem("temaPainelCampanhas") || "claro";
@@ -917,6 +1099,7 @@
         campanhas.forEach(campanha => {
           const item = dados[campanha.id] || {};
           contagemAtual[campanha.id] = {
+            campanha: Number(item.campanha || 0),
             desqualificado: Number(item.desqualificado || 0),
             semGraduacao: Number(item.semGraduacao || 0)
           };
@@ -943,15 +1126,43 @@
         const contadorRef = ref(db, `painelCampanhas/classificacoes/${id}/${tipo}`);
         await runTransaction(contadorRef, (valorAtual) => Number(valorAtual || 0) + 1);
 
-        const label = tipo === "desqualificado" ? "desqualificado" : "não tem graduação";
-        mostrarToast(`+1 ${label}: ${campanha.mensagem}`);
+        const label = tipo === "campanha"
+          ? "+1 lead respondeu"
+          : tipo === "desqualificado"
+            ? "X desqualificado"
+            : "● sem graduação";
+
+        mostrarToast(`${label}: ${campanha.mensagem}`);
       } catch (error) {
         console.error(error);
         alert("Não foi possível registrar. Confira o Firebase e a internet.");
       }
     };
 
-    window.desfazerClassificacao = async function(id, tipo) {
+    window.abrirDesfazer = function(id) {
+      const campanha = campanhas.find(c => c.id === id);
+      if (!campanha) return;
+
+      campanhaParaDesfazer = campanha;
+      document.getElementById("modalDesfazerText").textContent = campanha.mensagem;
+      document.getElementById("modalDesfazer").classList.add("show");
+    };
+
+    window.fecharModalDesfazer = function() {
+      campanhaParaDesfazer = null;
+      document.getElementById("modalDesfazer").classList.remove("show");
+    };
+
+    window.confirmarDesfazerModal = async function(tipo) {
+      if (!campanhaParaDesfazer) return;
+
+      const campanha = campanhaParaDesfazer;
+      fecharModalDesfazer();
+
+      await desfazerClassificacao(campanha.id, tipo);
+    };
+
+    async function desfazerClassificacao(id, tipo) {
       if (!db) {
         alert("Firebase ainda não configurado.");
         return;
@@ -961,8 +1172,9 @@
       if (!campanha) return;
 
       const atual = Number((contagemAtual[id] && contagemAtual[id][tipo]) || 0);
+
       if (atual <= 0) {
-        mostrarToast("Essa classificação já está zerada.");
+        mostrarToast("Essa modalidade já está zerada.");
         return;
       }
 
@@ -973,13 +1185,18 @@
           return Math.max(0, numero - 1);
         });
 
-        const label = tipo === "desqualificado" ? "desqualificado" : "não tem graduação";
-        mostrarToast(`-1 desfeito em ${label}: ${campanha.mensagem}`);
+        const label = tipo === "campanha"
+          ? "+1 lead respondeu"
+          : tipo === "desqualificado"
+            ? "X desqualificado"
+            : "● sem graduação";
+
+        mostrarToast(`Desfeito: ${label} - ${campanha.mensagem}`);
       } catch (error) {
         console.error(error);
         alert("Não foi possível desfazer. Confira o Firebase e a internet.");
       }
-    };
+    }
 
     function mostrarToast(texto) {
       const toast = document.getElementById("toast");
@@ -993,28 +1210,30 @@
     }
 
     function totaisGerais() {
+      let campanha = 0;
       let desqualificado = 0;
       let semGraduacao = 0;
 
-      campanhas.forEach(campanha => {
-        const item = contagemAtual[campanha.id] || {};
+      campanhas.forEach(itemCampanha => {
+        const item = contagemAtual[itemCampanha.id] || {};
+        campanha += Number(item.campanha || 0);
         desqualificado += Number(item.desqualificado || 0);
         semGraduacao += Number(item.semGraduacao || 0);
       });
 
       return {
+        campanha,
         desqualificado,
-        semGraduacao,
-        total: desqualificado + semGraduacao
+        semGraduacao
       };
     }
 
     function renderizarResumo() {
       const totais = totaisGerais();
-      const lider = getRanking("total")[0];
+      const lider = getRanking("campanha")[0];
 
       document.getElementById('summary').innerHTML = `
-        <div class="metric total"><span>Total classificado</span><strong>${totais.total}</strong></div>
+        <div class="metric total"><span>Leads que responderam</span><strong>${totais.campanha}</strong></div>
         <div class="metric desq"><span>Desqualificados</span><strong>${totais.desqualificado}</strong></div>
         <div class="metric semgrad"><span>Não tem graduação</span><strong>${totais.semGraduacao}</strong></div>
         <div class="metric"><span>Campanha líder</span><strong style="font-size:16px;letter-spacing:-0.04em;">${lider && lider.total ? lider.mensagem : 'Nenhuma ainda'}</strong></div>
@@ -1025,34 +1244,34 @@
       const grid = document.getElementById('campaignGrid');
 
       grid.innerHTML = campanhas.map(campanha => {
-        const item = contagemAtual[campanha.id] || { desqualificado: 0, semGraduacao: 0 };
+        const item = contagemAtual[campanha.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
 
         return `
           <div class="campaign-card">
             <div class="campaign-message"><span>${campanha.mensagem}</span></div>
 
             <div class="stats-row">
+              <div class="stat-mini camp">
+                <strong>${item.campanha || 0}</strong>
+                <span>+1</span>
+              </div>
               <div class="stat-mini desq">
                 <strong>${item.desqualificado || 0}</strong>
-                <span>Desqualificado</span>
+                <span>X</span>
               </div>
               <div class="stat-mini semgrad">
                 <strong>${item.semGraduacao || 0}</strong>
-                <span>Não tem graduação</span>
+                <span>●</span>
               </div>
             </div>
 
-            <div class="category-actions">
-              <div class="action-group">
-                <button class="btn-add-desq" onclick="registrarClassificacao('${campanha.id}', 'desqualificado')">+ Desq.</button>
-                <button class="btn-undo" onclick="desfazerClassificacao('${campanha.id}', 'desqualificado')">Desfazer</button>
-              </div>
-
-              <div class="action-group">
-                <button class="btn-add-semgrad" onclick="registrarClassificacao('${campanha.id}', 'semGraduacao')">+ Sem grad.</button>
-                <button class="btn-undo" onclick="desfazerClassificacao('${campanha.id}', 'semGraduacao')">Desfazer</button>
-              </div>
+            <div class="symbol-actions">
+              <button class="symbol-btn symbol-lead" onclick="registrarClassificacao('${campanha.id}', 'campanha')">+1</button>
+              <button class="symbol-btn symbol-desq" onclick="registrarClassificacao('${campanha.id}', 'desqualificado')">X</button>
+              <button class="symbol-btn symbol-semgrad" onclick="registrarClassificacao('${campanha.id}', 'semGraduacao')">●</button>
             </div>
+
+            <button class="btn-undo-card" onclick="abrirDesfazer('${campanha.id}')">Desfazer</button>
           </div>
         `;
       }).join('');
@@ -1061,15 +1280,14 @@
     function getRanking(tipo) {
       return campanhas
         .map(c => {
-          const item = contagemAtual[c.id] || { desqualificado: 0, semGraduacao: 0 };
-          const desq = Number(item.desqualificado || 0);
-          const semgrad = Number(item.semGraduacao || 0);
+          const item = contagemAtual[c.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
 
           return {
             ...c,
-            desqualificado: desq,
-            semGraduacao: semgrad,
-            total: tipo === "total" ? desq + semgrad : tipo === "desqualificado" ? desq : semgrad
+            campanha: Number(item.campanha || 0),
+            desqualificado: Number(item.desqualificado || 0),
+            semGraduacao: Number(item.semGraduacao || 0),
+            total: Number(item[tipo] || 0)
           };
         })
         .sort((a, b) => b.total - a.total || a.mensagem.localeCompare(b.mensagem));
@@ -1100,7 +1318,7 @@
     function renderizarTudo() {
       renderizarResumo();
       renderizarCampanhas();
-      renderizarRanking("total", "rankingTotal");
+      renderizarRanking("campanha", "rankingCampanhas");
       renderizarRanking("desqualificado", "rankingDesqualificados");
       renderizarRanking("semGraduacao", "rankingSemGraduacao");
     }
@@ -1124,6 +1342,7 @@
 
       try {
         await set(ref(db, "painelCampanhas/classificacoes"), baseContagem);
+        await set(ref(db, "painelCampanhas/registros"), null);
         await set(ref(db, "painelCampanhas/historico"), null);
         mostrarToast("Contador zerado com senha de gestor.");
       } catch (error) {
@@ -1134,21 +1353,24 @@
 
     window.copiarResumo = function() {
       const linhas = campanhas.map(c => {
-        const item = contagemAtual[c.id] || { desqualificado: 0, semGraduacao: 0 };
-        return `${c.mensagem}: ${item.desqualificado || 0} desqualificados | ${item.semGraduacao || 0} sem graduação | ${(item.desqualificado || 0) + (item.semGraduacao || 0)} total`;
+        const item = contagemAtual[c.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
+        return `${c.mensagem}: ${item.campanha || 0} respondeu | ${item.desqualificado || 0} desqualificados | ${item.semGraduacao || 0} sem graduação`;
       });
       navigator.clipboard.writeText(linhas.join('\n'));
       alert('Resumo copiado.');
     };
 
     window.exportarCSV = function() {
-      const linhas = [['Mensagem', 'Desqualificados', 'Nao tem graduacao', 'Total']];
+      const linhas = [['Mensagem', 'Lead respondeu', 'Desqualificados', 'Nao tem graduacao']];
 
       campanhas.forEach(c => {
-        const item = contagemAtual[c.id] || { desqualificado: 0, semGraduacao: 0 };
-        const desq = Number(item.desqualificado || 0);
-        const semgrad = Number(item.semGraduacao || 0);
-        linhas.push([c.mensagem, desq, semgrad, desq + semgrad]);
+        const item = contagemAtual[c.id] || { campanha: 0, desqualificado: 0, semGraduacao: 0 };
+        linhas.push([
+          c.mensagem,
+          Number(item.campanha || 0),
+          Number(item.desqualificado || 0),
+          Number(item.semGraduacao || 0)
+        ]);
       });
 
       const csv = linhas
