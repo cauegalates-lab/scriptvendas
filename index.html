@@ -3,25 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contador de Leads por Campanha - Tempo Real</title>
+  <title>Contador de Leads por Campanha - Ranking</title>
   <style>
     :root {
-      --bg-main: #eef4ff;
-      --bg-secondary: #f8fafc;
+      --bg-main: #fff7ed;
+      --bg-secondary: #eef4ff;
       --card: #ffffff;
-      --card-2: #f8fafc;
+      --card-2: #fffaf4;
       --text: #172033;
       --muted: #64748b;
       --line: #e5e7eb;
-      --primary: #2563eb;
-      --primary-soft: #eff6ff;
-      --primary-text: #1d4ed8;
+
+      --orange: #f97316;
+      --orange-strong: #ea580c;
+      --orange-soft: #ffedd5;
+      --orange-text: #9a3412;
+
+      --blue: #2563eb;
+      --blue-dark: #0f1f3a;
+      --blue-soft: #eff6ff;
+      --blue-text: #1d4ed8;
+
       --success: #16a34a;
-      --success-soft: #dcfce7;
-      --success-text: #166534;
       --danger: #dc2626;
-      --danger-soft: #fee2e2;
-      --danger-text: #991b1b;
       --warning: #f59e0b;
       --radius: 20px;
       --shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
@@ -29,34 +33,43 @@
     }
 
     body.dark-mode {
-      --bg-main: #111827;
-      --bg-secondary: #1a2430;
-      --card: #1b2430;
-      --card-2: #202b38;
-      --text: #dce3ec;
-      --muted: #9aa8b7;
-      --line: rgba(156, 170, 188, 0.18);
-      --primary: #6ea8fe;
-      --primary-soft: rgba(110, 168, 254, 0.13);
-      --primary-text: #aacbff;
-      --success: #58c98b;
-      --success-soft: rgba(88, 201, 139, 0.14);
-      --success-text: #9ee6bd;
-      --danger: #e06c75;
-      --danger-soft: rgba(224, 108, 117, 0.14);
-      --danger-text: #ffb4bb;
-      --warning: #e5b567;
-      --shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
-      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.20);
+      --bg-main: #071527;
+      --bg-secondary: #0f1f3a;
+      --card: #0f1f3a;
+      --card-2: #132844;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --line: rgba(255, 255, 255, 0.16);
+
+      --orange: #f97316;
+      --orange-strong: #fb923c;
+      --orange-soft: rgba(249, 115, 22, 0.16);
+      --orange-text: #fed7aa;
+
+      --blue: #ffffff;
+      --blue-dark: #071527;
+      --blue-soft: rgba(255, 255, 255, 0.12);
+      --blue-text: #ffffff;
+
+      --success: #fb923c;
+      --danger: #ffffff;
+      --warning: #f97316;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+      --card-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
     }
 
     * { box-sizing: border-box; }
 
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-secondary) 52%, var(--bg-main) 100%);
+      background: var(--bg-secondary);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
@@ -64,9 +77,14 @@
     }
 
     .app {
-      width: min(1800px, calc(100% - 20px));
+      width: min(1860px, calc(100% - 20px));
+      height: 100vh;
       margin: 0 auto;
-      padding: 16px 0 18px;
+      padding: 12px 0;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      overflow: hidden;
     }
 
     .topbar {
@@ -74,58 +92,67 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      margin-bottom: 12px;
+      min-height: 46px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 14px;
+      min-width: 0;
     }
 
     .logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--primary), #111827);
+      width: 40px;
+      height: 40px;
+      border-radius: 15px;
+      background: var(--blue-dark);
       color: #ffffff;
       display: grid;
       place-items: center;
       font-weight: 900;
       box-shadow: var(--shadow);
+      flex: 0 0 auto;
     }
 
     h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 21px;
       line-height: 1.1;
       letter-spacing: -0.04em;
+      white-space: nowrap;
     }
 
     .subtitle {
-      margin-top: 5px;
-      font-size: 13px;
+      margin-top: 4px;
+      font-size: 12px;
       color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 760px;
     }
 
     .actions {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 8px;
+      flex-wrap: nowrap;
       justify-content: flex-end;
     }
 
     button {
       border: none;
-      border-radius: 13px;
-      padding: 11px 14px;
-      font-weight: 800;
+      border-radius: 12px;
+      padding: 9px 12px;
+      font-weight: 850;
       cursor: pointer;
       transition: 0.18s ease;
-      font-size: 13px;
+      font-size: 12px;
+      white-space: nowrap;
     }
 
     button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
 
     .btn-soft {
       background: var(--card);
@@ -134,47 +161,76 @@
     }
 
     .btn-soft:hover {
-      border-color: var(--primary);
-      background: var(--primary-soft);
+      border-color: var(--blue);
+      background: var(--blue-soft);
+      color: var(--blue-text);
     }
 
     .btn-danger {
-      background: var(--danger);
-      color: #fff;
+      background: var(--orange);
+      color: #ffffff;
     }
 
     .btn-danger:hover {
-      filter: brightness(0.95);
+      background: var(--orange-strong);
     }
 
     .summary {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 12px;
+      min-height: 64px;
     }
 
     .metric {
-      padding: 11px 14px;
+      padding: 10px 13px;
       border-radius: 16px;
       background: var(--card);
       border: 1px solid var(--line);
       box-shadow: var(--card-shadow);
+      min-width: 0;
+      border-top: 3px solid var(--orange);
+    }
+
+    .metric:nth-child(2) {
+      border-top-color: var(--blue);
     }
 
     .metric span {
       display: block;
       font-size: 12px;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 750;
     }
 
     .metric strong {
       display: block;
-      margin-top: 4px;
-      font-size: 24px;
+      margin-top: 3px;
+      font-size: 22px;
       letter-spacing: -0.06em;
       color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      gap: 12px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .left-panel,
+    .right-panel {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .right-panel {
+      display: grid;
+      grid-template-rows: 1fr;
     }
 
     .card {
@@ -184,30 +240,43 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       transition: background 0.25s ease, border-color 0.25s ease;
+      min-height: 0;
+    }
+
+    .left-panel .card,
+    .right-panel .card {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
     }
 
     .card-header {
-      padding: 12px 16px 10px;
+      padding: 11px 14px 9px;
       border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      min-height: 56px;
     }
 
     .card-title {
-      font-size: 16px;
-      font-weight: 900;
+      font-size: 15px;
+      font-weight: 950;
       letter-spacing: -0.02em;
     }
 
     .card-subtitle {
       font-size: 12px;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
-    .card-body { padding: 12px 16px 14px; }
+    .card-body {
+      padding: 10px 12px 12px;
+      min-height: 0;
+      overflow: hidden;
+    }
 
     .pill {
       display: inline-flex;
@@ -215,22 +284,27 @@
       justify-content: center;
       padding: 6px 9px;
       border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary-text);
+      background: var(--orange-soft);
+      color: var(--orange-text);
       font-size: 12px;
       font-weight: 900;
       width: fit-content;
       white-space: nowrap;
     }
 
+    .pill-blue {
+      background: var(--blue-soft);
+      color: var(--blue-text);
+    }
+
     .pill-success {
-      background: var(--success-soft);
-      color: var(--success-text);
+      background: var(--orange-soft);
+      color: var(--orange-text);
     }
 
     .pill-danger {
-      background: var(--danger-soft);
-      color: var(--danger-text);
+      background: var(--blue-soft);
+      color: var(--blue-text);
     }
 
     .hint {
@@ -240,117 +314,197 @@
     }
 
     .campaign-grid {
+      height: 100%;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 9px;
+      overflow: hidden;
     }
 
     .campaign-card {
-      min-height: 112px;
+      min-height: 0;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 16px;
       background: var(--card-2);
-      padding: 12px;
-      cursor: pointer;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 8px;
       transition: 0.18s ease;
       box-shadow: var(--card-shadow);
+      overflow: hidden;
     }
 
     .campaign-card:hover {
       transform: translateY(-2px);
-      border-color: var(--primary);
+      border-color: var(--orange);
       background: var(--card);
       box-shadow: var(--shadow);
     }
 
-    .campaign-card:active { transform: translateY(0); }
-
     .campaign-message {
-      font-size: 13px;
-      line-height: 1.32;
-      font-weight: 750;
+      font-size: 12.4px;
+      line-height: 1.25;
+      font-weight: 780;
       letter-spacing: -0.02em;
       color: var(--text);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
 
     .campaign-footer {
+      border-top: 1px solid var(--line);
+      padding-top: 7px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .campaign-stats {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      border-top: 1px solid var(--line);
-      padding-top: 8px;
+      gap: 8px;
     }
 
     .count-box {
       display: flex;
       align-items: baseline;
-      gap: 8px;
+      gap: 7px;
     }
 
     .count {
-      font-size: 25px;
+      font-size: 23px;
       font-weight: 950;
       letter-spacing: -0.08em;
     }
 
     .count-label {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
       font-weight: 900;
       letter-spacing: 0.06em;
     }
 
-    .click-tip {
-      font-size: 12px;
-      font-weight: 900;
-      color: var(--primary-text);
-      background: var(--primary-soft);
-      padding: 6px 8px;
-      border-radius: 999px;
-      white-space: nowrap;
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 0.82fr;
+      gap: 7px;
     }
 
-    .history-list {
-      max-height: 190px;
+    .btn-add {
+      background: var(--orange);
+      color: #ffffff;
+    }
+
+    .btn-add:hover {
+      background: var(--orange-strong);
+    }
+
+    .btn-undo {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-undo:hover {
+      background: var(--blue-soft);
+      color: var(--blue-text);
+      border-color: var(--blue);
+    }
+
+    .ranking-list {
+      height: 100%;
       overflow: auto;
       display: grid;
-      gap: 10px;
+      gap: 9px;
+      padding-right: 4px;
     }
 
-    .history-item {
-      padding: 13px;
+    .ranking-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .ranking-list::-webkit-scrollbar-track {
+      background: rgba(100, 116, 139, .14);
+      border-radius: 999px;
+    }
+
+    .ranking-list::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--orange), var(--blue));
+      border-radius: 999px;
+    }
+
+    .ranking-item {
+      padding: 10px;
       border: 1px solid var(--line);
       background: var(--card-2);
       border-radius: 15px;
-      font-size: 13px;
-    }
-
-    .history-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: grid;
       gap: 8px;
-      margin-bottom: 8px;
-      font-weight: 900;
     }
 
-    .history-text {
-      color: var(--muted);
-      line-height: 1.4;
+    .ranking-top {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .rank-position {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 950;
       font-size: 12px;
     }
 
-    .bottom-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 12px;
-      margin-top: 12px;
+    body.dark-mode .rank-position {
+      background: var(--orange);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .ranking-message {
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .ranking-count {
+      font-size: 20px;
+      font-weight: 950;
+      color: var(--orange);
+      letter-spacing: -0.06em;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(100, 116, 139, .18);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: var(--orange);
+      transition: width .25s ease;
+    }
+
+    body.dark-mode .bar-fill {
+      background: var(--orange);
     }
 
     .status-dot {
@@ -365,21 +519,70 @@
     .status-dot.ok { background: var(--success); }
     .status-dot.error { background: var(--danger); }
 
-    @media (max-width: 1280px) {
-      .campaign-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .toast {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 30;
+      padding: 11px 13px;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      font-weight: 800;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .2s ease;
+      max-width: 420px;
     }
 
-    @media (max-width: 980px) {
-      .summary, .campaign-grid, .bottom-grid { grid-template-columns: 1fr; }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    @media (max-width: 720px) {
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
+    @media (max-width: 1500px) {
+      .main-layout { grid-template-columns: minmax(0, 1fr) 390px; }
+      .campaign-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 1050px) {
+      html, body { overflow: auto; height: auto; }
+      .app {
+        height: auto;
+        overflow: visible;
+        display: block;
       }
 
-      .actions, .actions button { width: 100%; }
+      .summary,
+      .main-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-bottom: 10px;
+      }
+
+      .left-panel .card,
+      .right-panel .card {
+        height: auto;
+      }
+
+      .campaign-grid {
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        overflow: visible;
+      }
+
+      .campaign-card {
+        min-height: 125px;
+      }
+
+      .ranking-list {
+        max-height: 420px;
+      }
     }
   </style>
 </head>
@@ -390,7 +593,7 @@
         <div class="logo">CW</div>
         <div>
           <h1>Contador de Leads por Campanha</h1>
-          <div class="subtitle">Clique na mensagem correspondente. Os números atualizam em tempo real para todos.</div>
+          <div class="subtitle">Cards para clicar à esquerda. Ranking em tempo real à direita.</div>
         </div>
       </div>
       <div class="actions">
@@ -403,45 +606,40 @@
 
     <section class="summary" id="summary"></section>
 
-    <section class="card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">Clique na mensagem da campanha</div>
-          <div class="card-subtitle">Cada clique salva no Firebase e aparece em tempo real para o gestor.</div>
-        </div>
-        <span class="pill" id="connectionStatus"><span class="status-dot"></span>Conectando</span>
-      </div>
-      <div class="card-body">
-        <div class="campaign-grid" id="campaignGrid"></div>
-      </div>
-    </section>
-
-    <section class="bottom-grid">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Último registro</div>
-            <div class="card-subtitle">Mostra o último card clicado neste navegador.</div>
+    <section class="main-layout">
+      <div class="left-panel">
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Clique na campanha</div>
+              <div class="card-subtitle">Clique em +1 para somar. Use desfazer para tirar um clique da campanha específica.</div>
+            </div>
+            <span class="pill" id="connectionStatus"><span class="status-dot"></span>Conectando</span>
           </div>
-        </div>
-        <div class="card-body">
-          <div id="lastResult" class="hint">Nenhum lead registrado ainda.</div>
-        </div>
+          <div class="card-body">
+            <div class="campaign-grid" id="campaignGrid"></div>
+          </div>
+        </section>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Histórico em tempo real</div>
-            <div class="card-subtitle">Últimos registros salvos no Firebase.</div>
+      <aside class="right-panel">
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Ranking das campanhas</div>
+              <div class="card-subtitle">Da campanha mais clicada para a menos clicada.</div>
+            </div>
+            <span class="pill pill-blue">Tempo real</span>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="history-list" id="history"></div>
-        </div>
-      </div>
+          <div class="card-body">
+            <div class="ranking-list" id="rankingList"></div>
+          </div>
+        </section>
+      </aside>
     </section>
   </main>
+
+  <div class="toast" id="toast"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
@@ -450,11 +648,7 @@
       ref,
       onValue,
       runTransaction,
-      push,
-      set,
-      serverTimestamp,
-      query,
-      limitToLast
+      set
     } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
 
     const firebaseConfig = {
@@ -484,7 +678,7 @@
 
     let db = null;
     let contagemAtual = {};
-    let historicoAtual = [];
+    let toastTimer = null;
 
     const baseContagem = {};
     campanhas.forEach(c => baseContagem[c.id] = 0);
@@ -512,12 +706,7 @@
     } catch (error) {
       console.error(error);
       atualizarStatus("Erro Firebase", "error");
-      document.getElementById('lastResult').innerHTML = `
-        <span class="pill pill-danger">Configuração pendente</span>
-        <div class="hint" style="margin-top:10px;">
-          Confira o firebaseConfig no código antes de publicar.
-        </div>
-      `;
+      mostrarToast("Erro na configuração do Firebase.");
     }
 
     function atualizarStatus(texto, tipo) {
@@ -528,26 +717,14 @@
 
     function iniciarFirebase() {
       const contadoresRef = ref(db, "painelCampanhas/contadores");
-      const historicoRef = query(ref(db, "painelCampanhas/historico"), limitToLast(25));
 
       onValue(contadoresRef, (snapshot) => {
         contagemAtual = { ...baseContagem, ...(snapshot.val() || {}) };
-        renderizarTudo(false);
+        renderizarTudo();
         atualizarStatus("Tempo real ativo", "ok");
       }, (error) => {
         console.error(error);
         atualizarStatus("Erro ao ler", "error");
-      });
-
-      onValue(historicoRef, (snapshot) => {
-        const dados = snapshot.val() || {};
-        historicoAtual = Object.entries(dados)
-          .map(([key, value]) => ({ key, ...value }))
-          .sort((a, b) => (b.criadoEmLocal || 0) - (a.criadoEmLocal || 0));
-        renderizarHistorico();
-      }, (error) => {
-        console.error(error);
-        atualizarStatus("Erro histórico", "error");
       });
     }
 
@@ -563,44 +740,62 @@
       try {
         const contadorRef = ref(db, `painelCampanhas/contadores/${id}`);
         await runTransaction(contadorRef, (valorAtual) => (valorAtual || 0) + 1);
-
-        await push(ref(db, "painelCampanhas/historico"), {
-          campanhaId: campanha.id,
-          campanha: campanha.nome,
-          mensagem: campanha.mensagem,
-          data: new Date().toLocaleString("pt-BR"),
-          criadoEmLocal: Date.now(),
-          criadoEmServidor: serverTimestamp()
-        });
-
-        mostrarUltimoRegistro(campanha);
+        mostrarToast(`+1 registrado: ${campanha.mensagem}`);
       } catch (error) {
         console.error(error);
         alert("Não foi possível registrar o lead. Confira o Firebase e a internet.");
       }
     };
 
-    function mostrarUltimoRegistro(campanha) {
-      document.getElementById('lastResult').innerHTML = `
-        <span class="pill pill-success">+1 registrado</span>
-        <div style="font-size:20px;font-weight:900;letter-spacing:-0.04em;line-height:1.25;margin-top:12px;">${campanha.mensagem}</div>
-        <div class="hint" style="margin-top:8px;">Registro salvo no Firebase.</div>
-      `;
+    window.desfazerCampanha = async function(id) {
+      if (!db) {
+        alert("Firebase ainda não configurado.");
+        return;
+      }
+
+      const campanha = campanhas.find(c => c.id === id);
+      if (!campanha) return;
+
+      const atual = Number(contagemAtual[id] || 0);
+      if (atual <= 0) {
+        mostrarToast("Essa campanha já está zerada.");
+        return;
+      }
+
+      try {
+        const contadorRef = ref(db, `painelCampanhas/contadores/${id}`);
+        await runTransaction(contadorRef, (valorAtual) => {
+          const numero = Number(valorAtual || 0);
+          return Math.max(0, numero - 1);
+        });
+
+        mostrarToast(`-1 desfeito: ${campanha.mensagem}`);
+      } catch (error) {
+        console.error(error);
+        alert("Não foi possível desfazer o clique. Confira o Firebase e a internet.");
+      }
+    };
+
+    function mostrarToast(texto) {
+      const toast = document.getElementById("toast");
+      toast.textContent = texto;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
     }
 
     function renderizarResumo() {
       const total = Object.values(contagemAtual).reduce((soma, valor) => soma + Number(valor || 0), 0);
-      let maior = { mensagem: 'Nenhuma ainda', total: 0 };
-
-      campanhas.forEach(c => {
-        const qtd = contagemAtual[c.id] || 0;
-        if (qtd > maior.total) maior = { mensagem: c.mensagem, total: qtd };
-      });
+      const ranking = getRanking();
+      const maior = ranking[0];
 
       document.getElementById('summary').innerHTML = `
         <div class="metric"><span>Total de leads marcados</span><strong>${total}</strong></div>
         <div class="metric"><span>Campanhas cadastradas</span><strong>${campanhas.length}</strong></div>
-        <div class="metric"><span>Maior origem</span><strong style="font-size:18px;letter-spacing:-0.04em;line-height:1.15;">${maior.total ? maior.mensagem : 'Nenhuma ainda'}</strong></div>
+        <div class="metric"><span>Campanha líder</span><strong style="font-size:18px;letter-spacing:-0.04em;line-height:1.15;">${maior && maior.total ? maior.mensagem : 'Nenhuma ainda'}</strong></div>
       `;
     }
 
@@ -608,46 +803,57 @@
       const grid = document.getElementById('campaignGrid');
 
       grid.innerHTML = campanhas.map(campanha => `
-        <div class="campaign-card" onclick="registrarLead('${campanha.id}')" title="Clique para somar +1 lead">
+        <div class="campaign-card">
           <div class="campaign-message">${campanha.mensagem}</div>
           <div class="campaign-footer">
-            <div class="count-box">
-              <span class="count">${contagemAtual[campanha.id] || 0}</span>
-              <span class="count-label">leads</span>
+            <div class="campaign-stats">
+              <div class="count-box">
+                <span class="count">${contagemAtual[campanha.id] || 0}</span>
+                <span class="count-label">leads</span>
+              </div>
+              <span class="pill">campanha</span>
             </div>
-            <span class="click-tip">+1 clique</span>
+            <div class="card-actions">
+              <button class="btn-add" onclick="registrarLead('${campanha.id}')">+1 clique</button>
+              <button class="btn-undo" onclick="desfazerCampanha('${campanha.id}')">Desfazer</button>
+            </div>
           </div>
         </div>
       `).join('');
     }
 
-    function renderizarHistorico() {
-      const box = document.getElementById('history');
-
-      if (!historicoAtual.length) {
-        box.innerHTML = '<div class="hint">Nenhum lead registrado ainda.</div>';
-        return;
-      }
-
-      box.innerHTML = historicoAtual.map(item => `
-        <div class="history-item">
-          <div class="history-top">
-            <span class="pill">${item.data || 'Sem data'}</span>
-            <span class="pill">+1</span>
-          </div>
-          <div class="history-text">${item.mensagem || ''}</div>
-        </div>
-      `).join('');
+    function getRanking() {
+      return campanhas
+        .map(c => ({ ...c, total: Number(contagemAtual[c.id] || 0) }))
+        .sort((a, b) => b.total - a.total || a.mensagem.localeCompare(b.mensagem));
     }
 
-    function renderizarTudo(resetUltimo = true) {
+    function renderizarRanking() {
+      const ranking = getRanking();
+      const maior = Math.max(...ranking.map(item => item.total), 1);
+      const box = document.getElementById('rankingList');
+
+      box.innerHTML = ranking.map((item, index) => {
+        const percentual = Math.round((item.total / maior) * 100);
+        return `
+          <div class="ranking-item">
+            <div class="ranking-top">
+              <div class="rank-position">${index + 1}</div>
+              <div class="ranking-message">${item.mensagem}</div>
+              <div class="ranking-count">${item.total}</div>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:${percentual}%;"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderizarTudo() {
       renderizarResumo();
       renderizarCampanhas();
-      renderizarHistorico();
-
-      if (resetUltimo) {
-        document.getElementById('lastResult').textContent = 'Nenhum lead registrado ainda.';
-      }
+      renderizarRanking();
     }
 
     window.zerarDados = async function() {
@@ -657,7 +863,6 @@
       }
 
       const senha = prompt("Digite a senha do Gestor para zerar os números:");
-
       if (senha === null) return;
 
       if (senha !== SENHA_GESTOR) {
@@ -665,16 +870,13 @@
         return;
       }
 
-      const confirmar = confirm("Tem certeza que deseja zerar todos os números e limpar o histórico?");
+      const confirmar = confirm("Tem certeza que deseja zerar todos os números?");
       if (!confirmar) return;
 
       try {
         await set(ref(db, "painelCampanhas/contadores"), baseContagem);
         await set(ref(db, "painelCampanhas/historico"), null);
-        document.getElementById('lastResult').innerHTML = `
-          <span class="pill pill-danger">Contador zerado</span>
-          <div class="hint" style="margin-top:10px;">Ação realizada com senha de gestor.</div>
-        `;
+        mostrarToast("Contador zerado com senha de gestor.");
       } catch (error) {
         console.error(error);
         alert("Não foi possível zerar. Confira as regras do Firebase.");
@@ -682,16 +884,16 @@
     };
 
     window.copiarResumo = function() {
-      const linhas = campanhas.map(c => `${c.mensagem}: ${contagemAtual[c.id] || 0} leads`);
+      const linhas = getRanking().map(c => `${c.mensagem}: ${c.total} leads`);
       navigator.clipboard.writeText(linhas.join('\n'));
       alert('Resumo copiado.');
     };
 
     window.exportarCSV = function() {
-      const linhas = [['Mensagem', 'Leads']];
+      const linhas = [['Posicao', 'Mensagem', 'Leads']];
 
-      campanhas.forEach(c => {
-        linhas.push([c.mensagem, contagemAtual[c.id] || 0]);
+      getRanking().forEach((c, index) => {
+        linhas.push([index + 1, c.mensagem, c.total]);
       });
 
       const csv = linhas
@@ -702,7 +904,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'contador-leads-campanhas-tempo-real.csv';
+      a.download = 'ranking-leads-campanhas-tempo-real.csv';
       a.click();
       URL.revokeObjectURL(url);
     };
